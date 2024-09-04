@@ -46,7 +46,7 @@ Ensure you have the dataset Cardetails.csv containing car details.
 
 3.Run the Application
 
-Start the Streamlit application in installed IDE run app.py the main script thereand then in terminal run:
+Start the Streamlit application in installed IDE run app.py the main script there and then in terminal run:
 
 -streamlit run app.py
 
