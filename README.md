@@ -6,25 +6,84 @@ This project implements a car price prediction model using Linear Regression Mod
 ![Car price prediction1](https://github.com/user-attachments/assets/c955e57e-eaa8-4c42-81b1-21deaa879b4c)
 
 
+## Key Features
+**Interactive Web Interface**: Developed using Streamlit, this interface lets users easily input car details such as brand, year of manufacture, mileage, and more.
 
-# Car Price Prediction using Linear Regression
+**Linear Regression Model**: The core of the application, this model predicts car prices based on input features. It is trained using historical data and is serialized with pickle for easy reuse.
 
-This repository contains a project for predicting car prices using a Linear Regression model. The model is trained using a dataset of car details and deployed as a web application using Streamlit. The model is saved and loaded using `pickle` for persistence.
+**Data Processing**: Includes data cleaning and preprocessing steps to ensure high-quality inputs and accurate predictions.
 
-## Project Overview
+## Technologies Used
 
-The project involves the following key steps:
+Python: The primary programming language used.
 
-1. **Data Analysis**: Exploration and visualization of the dataset to understand the distribution and relationships between different features.
-2. **Data Cleaning**: Handling missing values, outliers, and ensuring the data is in a suitable format for training the model.
-3. **Model Training**: Using Linear Regression to train the model on the cleaned dataset.
-4. **Model Persistence**: Saving the trained model using `pickle` for later use.
-5. **Web Development**: Developing a user-friendly web application using Streamlit to allow users to interact with the interface easily.
+Pandas: For data manipulation and analysis.
 
-pre-requisite - install vs code or python
+NumPy: For numerical operations.
 
-Libraries used - sklearn,numpy,pandas,streamlit,pickle
+Scikit-learn: For building and training the Linear Regression model.
 
-Run the jupyter notebook in vs code there you will save the model using pickle and that will be imported in main script app.py , run app.py with given code then write in terminal Streamlit run app.py .There you you will preview the project(car price predictor).  
+
+Pickle: For saving and loading the trained model.
+
+Streamlit: For creating the user-friendly web interface.
+
+CSV: For data input and output operations.
+
+## Getting Started ##
+
+Install Dependencies
+
+1.Ensure you have Python installed and then install the necessary packages:
+
+
+
+pip install pandas numpy scikit-learn pickle5 streamlit
+
+2.Prepare Data
+
+Ensure you have the dataset Cardetails.csv containing car details.
+
+3.Run the Application
+
+Start the Streamlit application:
+
+-streamlit run app.py
+
+This will launch a web server, and you can access the application through the URL provided by Streamlit in your browser.
+
+
+Contributions to improve the model or enhance the application are welcome. Suggestions and improvements can be implemented by modifying the source code and updating the model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
