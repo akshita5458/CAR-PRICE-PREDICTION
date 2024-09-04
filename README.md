@@ -53,7 +53,7 @@ Start the Streamlit application in installed IDE run app.py the main script ther
 This will launch a web server, and you can access the application through the URL provided by Streamlit in your browser.
 
 
-Contributions to improve the model or enhance the application are welcome. Suggestions and improvements can be implemented by modifying the source code and updating the model.
+Contributions to improve the model or enhance the application are welcome. Feel free to contribute to this project by submitting pull requests or reporting issues. For major changes, please open an issue first to discuss what you would like to change.
 
 
 
