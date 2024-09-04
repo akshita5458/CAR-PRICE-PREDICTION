@@ -34,11 +34,11 @@ CSV: For data input and output operations.
 
 Install Dependencies
 
-1.Ensure you have Python installed and then install the necessary packages:
+1.Ensure you have Python/VS code installed and then install the necessary packages:
 
 
 
-pip install pandas numpy scikit-learn pickle5 streamlit
+pip install pandas numpy scikit-learn pickle streamlit
 
 2.Prepare Data
 
@@ -46,7 +46,7 @@ Ensure you have the dataset Cardetails.csv containing car details.
 
 3.Run the Application
 
-Start the Streamlit application:
+Start the Streamlit application in installed IDE run app.py the main script thereand then in terminal run:
 
 -streamlit run app.py
 
