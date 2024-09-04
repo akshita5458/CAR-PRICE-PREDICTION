@@ -1,58 +1,51 @@
-#include<stdio.h>
-#include<conio.h>
-from flask import Flask, render_template, request
+import pandas as pd 
+import numpy as np 
+import pickle as pk 
+import streamlit as st
 
-import pandas as pd
-import pickle
-import numpy as np
+model = pk.load(open('model (1).pkl','rb'))
 
-app = Flask(__name__)
+st.header('Car Price Prediction ML Model')
 
-try:
-    with open('LinearRegressionModel.pkl', 'rb') as file:
-        model = pickle.load(file)
-        print("Model loaded successfully!")
-except Exception as e:
-    print(f"Error loading the model: {e}")
-    model = None  
+cars_data = pd.read_csv('Cardetails.csv')
+
+def get_brand_name(car_name):
+    car_name = car_name.split(' ')[0]
+    return car_name.strip()
+cars_data['name'] = cars_data['name'].apply(get_brand_name)
+
+name = st.selectbox('Select Car Brand', cars_data['name'].unique())
+year = st.slider('Car Manufactured Year', 1994,2024)
+km_driven = st.slider('No of kms Driven', 11,200000)
+fuel = st.selectbox('Fuel type', cars_data['fuel'].unique())
+seller_type = st.selectbox('Seller  type', cars_data['seller_type'].unique())
+transmission = st.selectbox('Transmission type', cars_data['transmission'].unique())
+owner = st.selectbox('Seller  type', cars_data['owner'].unique())
+mileage = st.slider('Car Mileage', 10,40)
+engine = st.slider('Engine CC', 700,5000)
+max_power = st.slider('Max Power', 0,200)
+seats = st.slider('No of Seats', 5,10)
 
 
-try:
-    car = pd.read_csv("Cleaned_Car_data.csv")
-except Exception as e:
-    print(f"Error loading car data: {e}")
-    car = pd.DataFrame()  
+if st.button("Predict"):
+    input_data_model = pd.DataFrame(
+    [[name,year,km_driven,fuel,seller_type,transmission,owner,mileage,engine,max_power,seats]],
+    columns=['name','year','km_driven','fuel','seller_type','transmission','owner','mileage','engine','max_power','seats'])
+    
+    input_data_model['owner'].replace(['First Owner', 'Second Owner', 'Third Owner',
+       'Fourth & Above Owner', 'Test Drive Car'],
+                           [1,2,3,4,5], inplace=True)
+    input_data_model['fuel'].replace(['Diesel', 'Petrol', 'LPG', 'CNG'],[1,2,3,4], inplace=True)
+    input_data_model['seller_type'].replace(['Individual', 'Dealer', 'Trustmark Dealer'],[1,2,3], inplace=True)
+    input_data_model['transmission'].replace(['Manual', 'Automatic'],[1,2], inplace=True)
+    input_data_model['name'].replace(['Maruti', 'Skoda', 'Honda', 'Hyundai', 'Toyota', 'Ford', 'Renault',
+       'Mahindra', 'Tata', 'Chevrolet', 'Datsun', 'Jeep', 'Mercedes-Benz',
+       'Mitsubishi', 'Audi', 'Volkswagen', 'BMW', 'Nissan', 'Lexus',
+       'Jaguar', 'Land', 'MG', 'Volvo', 'Daewoo', 'Kia', 'Fiat', 'Force',
+       'Ambassador', 'Ashok', 'Isuzu', 'Opel'],
+                          [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+                          ,inplace=True)
 
-@app.route('/')
-def index():
-    if car.empty:
-        return "Car data not available"
+    car_price = model.predict(input_data_model)
 
-    companies = sorted(car['company'].unique())
-    car_models = sorted(car['name'].unique())
-    years = sorted(car['year'].unique(), reverse=True)
-    fuel_types = car['fuel_type'].unique()
-    companies.insert(0, "Select Company")
-    return render_template('index.html', companies=companies, car_models=car_models, years=years, fueltypes=fuel_types)
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    if model is None:
-        return "Model not available"
-
-    try:
-        company = request.form.get('company')
-        car_model = request.form.get('car_model')
-        year = int(request.form.get('year'))
-        fuel_type = request.form.get('fuel_type')
-        kms_driven = int(request.form.get('kilo_driven'))
-        print(company, car_model, year, fuel_type, kms_driven)
-
-        prediction = model.predict(pd.DataFrame([[car_model, company, year, kms_driven, fuel_type]],
-                                                columns=['name', 'company', 'year', 'kms_driven', 'fuel_type']))
-        return str(np.round(prediction[0], 2))
-    except Exception as e:
-        return f"Error during prediction: {e}"
-
-if __name__ == "_main_":
-    app.run(debug=True)
+    st.markdown('Car Price is going to be '+ str(car_price[0]))
