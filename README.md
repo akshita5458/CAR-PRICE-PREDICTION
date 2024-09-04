@@ -1,6 +1,7 @@
 # Car Price Prediction
 
 This project implements a car price prediction model using Linear Regression Model. The goal is to predict the price of a car based on various features such as the car’s brand, year of manufacture, kilometers driven, fuel type, seller type, transmission, owner type, mileage, engine capacity, max power, and the number of seats.
+LINKEDIN POST(https://www.linkedin.com/feed/update/urn:li:activity:7237243646754865152/)
 
 ![Car price prediction](https://github.com/user-attachments/assets/3e703780-2bc3-4acd-a39f-685b55e026e6)
 ![Car price prediction1](https://github.com/user-attachments/assets/c955e57e-eaa8-4c42-81b1-21deaa879b4c)
